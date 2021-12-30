@@ -48,11 +48,12 @@ def num_0(graph): # 현재 그래프 상에서 0의 개수 찾기
 
 field_0=[]
 
+# 새로 설치할 벽 3개를 선택한다.
 for i in range(n):
     for j in range(m):
         if lab[i][j]==0:
             field_0.append((i,j))
-
+# 3개의 조합을 만든다.
 comb=combinations(field_0,3)
 
 result=[]
