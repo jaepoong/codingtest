@@ -1,9 +1,12 @@
 n,m=map(int,input().split())
-x=[]
-d=[0]*n
+coin=[]
 for i in range(n):
-    x.append(int(input()))
-x.sort()
-for i in range(n):
-    for j in range(1,m+1):
-        i
+    coin.append(int(input()))
+coin=sorted(coin)
+d=[10001]*(m+1)
+d=[0]=0
+for i in range(4):
+    for j in range(coin[i],m+1):
+        if d[j-coin[i]]!=10001:
+            d[j]=min(d[j],d[j-coin[i]]+1)
+
