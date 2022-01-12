@@ -31,4 +31,3 @@ for combi in combination:
     result.append(sum(chicks))
 
 print(min(result))
-123
