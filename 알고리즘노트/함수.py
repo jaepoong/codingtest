@@ -8,7 +8,6 @@ def rotate_90(m): # 2차원 리스트 90도 회전
             ret[c][N-1-r] = m[r][c]
     return ret
 
-def 
 
 def is_prime_number(x): # 소수 판별
     for i in range(2,int(math.sqrt(x))+1):
