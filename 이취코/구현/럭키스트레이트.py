@@ -1,12 +1,9 @@
 n=input()
-le=len(n)//2
-left=0
-right=0
-for i in range(le):
-    left+=int(n[i])
-    right+=int(n[le+i])
-
-if left==right:
-    print("LUCKY")
-else:
+half=len(n)//2
+result=0
+for i in range(half):
+    result=result+int(n[i])-int(n[half+i])
+if result:
     print("READY")
+else:
+    print("LUCKY")

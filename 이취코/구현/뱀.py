@@ -1,45 +1,55 @@
 from collections import deque
-queue=deque()
-n=int(input())
-k=int(input())
-li=[] # 사과
-for i in range(k):
-    li.append(list(map(int,input().split())))
 
-l=int(input())
-direction=[list(input().split()) for _ in range(l)] # 방향 변경 시간[0], 방향[1]
-dy=[0,-1,0,1]
-dx=[1,0,-1,0] # 동,남,서,북
-di=0
-x,y=0,0
-time=0
-queue.append([0,0])
 
-while True:
-    time+=1
-    dny=y+dy[di]
-    dnx=x+dx[di]
-    
-    if dny < 0 or dny >=n or dnx <0 or dnx  >= n or [dny,dnx] in queue : # 벽에 부딫히면 끝
-        break
-    
-    if [dny+1,dnx+1] in li: 
-        li.remove([dny+1,dnx+1])
-        
-    else:    
-        queue.popleft()
+def change(d, c):
+    # 상(0) 우(1) 하(2) 좌(3)
+    # 동쪽 회전: 상(0) -> 우(1) -> 하(2) -> 좌(3) -> 상(0) : +1 방향
+    # 왼쪽 회전: 상(0) -> 좌(3) -> 하(2) -> 우(1) -> 상(0) : -1 방향
+    if c == "L":
+        d = (d - 1) % 4
+    else:
+        d = (d + 1) % 4
+    return d
 
-    queue.append([dny,dnx])
-    
-    y=dny
-    x=dnx
-    
-    if time==int(direction[0][0]):
-        if direction[0][1]=='L':
-            di=(di-1)%4
-        elif direction[0][1] == 'D':
-            di=(di+1)%4
-        direction.pop(0)
-print(direction)
-print(li)
-print(time)
+
+# 상 우 하 좌
+dy = [-1, 0, 1, 0]
+dx = [0, 1, 0, -1]
+
+
+def start():
+    direction = 1  # 초기 방향
+    time = 1  # 시간
+    y, x = 0, 0  # 초기 뱀 위치
+    visited = deque([[y, x]])  # 방문 위치
+    arr[y][x] = 2
+    while True:
+        y, x = y + dy[direction], x + dx[direction]
+        if 0 <= y < N and 0 <= x < N and arr[y][x] != 2:
+            if not arr[y][x] == 1:  # 사과가 없는 경우
+                temp_y, temp_x = visited.popleft()
+                arr[temp_y][temp_x] = 0  # 꼬리 제거
+            arr[y][x] = 2
+            visited.append([y, x])
+            if time in times.keys():
+                direction = change(direction, times[time])
+            time += 1
+        else:  # 본인 몸에 부딪히거나, 벽에 부딪힌 경우
+            return time
+
+
+if __name__ == "__main__":
+
+    # input
+    N = int(input())
+    K = int(input())
+    arr = [[0] * N for _ in range(N)]
+    for _ in range(K):
+        a, b = map(int, input().split())
+        arr[a - 1][b - 1] = 1  # 사과 저장
+    L = int(input())
+    times = {}
+    for i in range(L):
+        X, C = input().split()
+        times[int(X)] = C
+    print(start())
