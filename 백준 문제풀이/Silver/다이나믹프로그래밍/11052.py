@@ -1,15 +1,9 @@
 n=int(input())
 card=list(map(int,input().split()))
-li=[[0 for _ in range(n)] for i in range(n)]
-for i in range(n):
-    li[i]=card[0]*i
+li=[0]*(n+1)
+li[1]=card[1]
+for i in range(2,n+1):
+    for j in range(1,i+1):
+        li[i]=max(li[i],li[i-j]+card[j])
 
-for i in range(1,n):
-    for j in range(i,n):
-        li[i][j]=max(li[i-1][j],li[i-1][j-i]+card[i])
-
-result=[]
-for i in range(n):
-    result.append(li[i][n-1])
-
-print(max(result))
+print(li[n])

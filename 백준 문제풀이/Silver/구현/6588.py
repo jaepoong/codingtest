@@ -20,3 +20,4 @@ while True:
         if n-array[i] in array:
             print(str(n)+" = "+str(array[i])+" + "+str(n-array[i]))
             break
+
