@@ -1,4 +1,3 @@
-import copy
 n=int(input())
 graph=[]
 for i in range(n):

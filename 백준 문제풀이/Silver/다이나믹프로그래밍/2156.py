@@ -1,13 +1,11 @@
-n=int(input())
-graph=[]
+n = int(input())
+w = [0]
 for i in range(n):
-    graph.append(int(input()))
-
-dp=[[0] for i in range(n)]
-dp[0]=graph[0]
-dp[1]=graph[0]+graph[1]
-dp[2]=max(dp[0]+graph[2],graph[1]+graph[2])
-for i in range(3,n):
-    dp[i]=max(dp[i-1],dp[i-2]+graph[i],dp[i-3]+graph[i-1]+graph[i])
-
-print(dp[n-1])
+    w.append(int(input()))
+dp = [0]
+dp.append(w[1])
+if n > 1:
+    dp.append(w[1] + w[2])
+for i in range(3, n + 1):
+    dp.append(max(dp[i - 1], dp[i - 3] + w[i - 1] + w[i], dp[i - 2] + w[i]))
+print(dp[n])

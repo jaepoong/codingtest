@@ -9,4 +9,4 @@ for i in range(2,n+1):
         for k in range(j+1):
             dp[i][j]+=dp[i-1][k]%10007
 
-print(dp)
+print(sum(dp[n])%10007)
